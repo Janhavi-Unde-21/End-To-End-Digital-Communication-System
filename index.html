@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive End-to-End Digital Communication System using Hamming(12,8) error correction">
+  <title>End-to-End Digital Communication System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>END-TO-END DIGITAL COMMUNICATION SYSTEM</h1>
+    <p>Text → Binary → Hamming Encoding → Noisy Channel → Hamming Correction → Text</p>
+  </header>
+
+  <main class="app-grid">
+    <section class="panel transmitter">
+      <h2>TRANSMITTER</h2>
+
+      <label class="label" for="messageInput">Enter Message</label>
+      <input id="messageInput" class="message-input" type="text" autocomplete="off"
+             placeholder="Type a message, e.g. HELLO">
+
+      <div class="button-row top-actions">
+        <button id="startButton" class="primary">▶ START SLOW TRANSMISSION</button>
+        <button id="resetButton" class="secondary">RESET</button>
+      </div>
+
+      <div class="section-title">① TEXT → BINARY (VISIBLE CHARACTER-BY-CHARACTER)</div>
+      <pre id="binaryOutput" class="output-box"></pre>
+
+      <div class="section-title">② HAMMING(12,8) ENCODING</div>
+      <div id="hammingStatus" class="status orange">Waiting for Hamming encoding...</div>
+      <pre id="encodedOutput" class="output-box tall"></pre>
+
+      <div class="probability-row">
+        <strong id="noiseLabel">Interference Level: 0.0000</strong>
+        <span>(randomly changes from 0 to 1; Hamming-safe interference model)</span>
+      </div>
+    </section>
+
+    <section class="panel channel">
+      <h2>NOISY CHANNEL</h2>
+
+      <div class="channel-visual">
+        <div class="channel-line"></div>
+        <div id="bitIndicator" class="bit-indicator"></div>
+        <div class="channel-arrow">➜</div>
+        <div class="data-label">DATA</div>
+        <div class="noise-label">RANDOM BIT FLIPS</div>
+      </div>
+
+      <div id="channelBit" class="channel-bit">Current bit: -</div>
+      <div id="channelStatus" class="status gray">WAITING FOR DATA</div>
+
+      <div class="mini-title">ERROR POSITIONS</div>
+      <div id="errorPositions" class="error-position">None</div>
+
+      <div id="berLabel" class="ber">BER: ---</div>
+    </section>
+
+    <section class="panel receiver">
+      <h2>RECEIVER</h2>
+
+      <div class="section-title">③ RECEIVED DATA AFTER CHANNEL</div>
+      <pre id="receivedOutput" class="output-box tall"></pre>
+
+      <div class="section-title">④ HAMMING SYNDROME + CORRECTION</div>
+      <div id="receiverStatus" class="status gray">Waiting...</div>
+      <pre id="comparisonOutput" class="output-box comparison"></pre>
+
+      <div class="section-title">⑤ CORRECTED BINARY</div>
+      <pre id="correctedOutput" class="output-box"></pre>
+
+      <div class="section-title">⑥ BINARY → TEXT</div>
+      <div id="recoveredText" class="recovered">---</div>
+    </section>
+  </main>
+
+  <section class="log-panel">
+    <div class="log-title">COMMUNICATION LOG</div>
+    <pre id="logOutput" class="log"></pre>
+  </section>
+
+  <footer>
+    <span>Hamming(12,8) • Single-bit error correction demonstration</span>
+    <span>GitHub Pages Ready</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
